@@ -1,5 +1,5 @@
 ---
-title: "Min fina titel"
+title: "Björn Olsson"
 ---
 Min me-sida i kursen oophp
 =========================
@@ -8,7 +8,7 @@ Min me-sida i kursen oophp
 
 [FIGURE src="image/me.jpg?w=400&a=4,27,11,0&cf&sharpen" class="right" caption="Bild på mig, i hobbiton Nya Zeeland."]
 
-Mitt namn är Björn och detta är min me-sida i kursen oophp.
+Mitt namn är Björn Olsson och jag är 32 år gammal.
 
 Jag är född och uppvuxen i en by 3 mil norr om Gällivare som heter Tjautjas.  
 Bor i malmberget med min sambo och våra två katter.
