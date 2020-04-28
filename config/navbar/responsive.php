@@ -85,14 +85,28 @@ return [
             "title" => "Anax development utilities",
         ],
         [
-            "text" => "Guess game",
-            "url" => "guess-game",
-            "title" => "Guess my number",
-        ],
-        [
-            "text" => "Dice game",
-            "url" => "dice-game",
-            "title" => "Dice game 100",
+            "text" => "Spel",
+            "url" => "spel",
+            "title" => "Spel",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Guess-game",
+                        "url" => "spel/guess-game",
+                        "title" => "Guess-game",
+                    ],
+                    [
+                        "text" => "Dice-game Kmom03",
+                        "url" => "spel/dice-game",
+                        "title" => "Tärningsspelet 100",
+                    ],
+                    [
+                        "text" => "Dice-game kmom04",
+                        "url" => "spel/dice-game-100",
+                        "title" => "Tärningspelet 100 v2",
+                    ],
+                ],
+            ],
         ],
     ],
 ];

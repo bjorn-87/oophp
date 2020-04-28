@@ -31,3 +31,10 @@ v3.0.2 (2020-04-28)
 ------------------------
 
 * Removing a var_dump and set max limit to dices.
+
+
+v4.0.0 (2020-04-28)
+------------------------
+
+* Adding a gamepage with all games and drop-down menu.
+* Adding a controller for dicegame kmom04.
