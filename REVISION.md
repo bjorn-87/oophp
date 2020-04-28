@@ -26,3 +26,8 @@ v3.0.1 (2020-04-23)
 ------------------------
 
 * Finished kmom03.
+
+v3.0.2 (2020-04-28)
+------------------------
+
+* Removing a var_dump and set max limit to dices.
