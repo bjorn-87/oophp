@@ -18,7 +18,7 @@ namespace Anax\View;
     <h2>Välj antal tärningar och spelarnamn.</h2>
     <form class="postFormDice" method="post">
         <label for="dices">Tärningar:</label>
-        <input type="number" name="dices" value="3" min=1>
+        <input type="number" name="dices" value="3" min=1 max=100>
         <label for="name">Namn:</label>
         <input type="text" name="name" value="Player" required>
         <br>

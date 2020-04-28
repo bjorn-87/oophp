@@ -75,7 +75,7 @@ $app->router->post("dice/play", function () use ($app) {
     $_SESSION["doit"] = $doit;
     $_SESSION["save"] = $save;
 
-    var_dump($_SESSION);
+    // var_dump($_SESSION);
     if ($reset) {
         return $app->response->redirect("dice/init");
     } elseif ($game->checkWinner()) {
