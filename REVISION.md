@@ -38,3 +38,14 @@ v4.0.0 (2020-04-28)
 
 * Adding a gamepage with all games and drop-down menu.
 * Adding a controller for dicegame kmom04.
+
+
+v4.0.1 (2020-04-29)
+------------------------
+
+* Finished DiceGame with histogram.
+
+v4.0.2 (2020-04-29)
+------------------------
+
+* Finished kmom04.
