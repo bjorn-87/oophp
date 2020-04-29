@@ -1,6 +1,6 @@
 <?php
 
-namespace Bjos\Dice;
+namespace Bjos\Dice100;
 
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
@@ -21,31 +21,6 @@ use Anax\Commons\AppInjectableTrait;
 class DiceController implements AppInjectableInterface
 {
     use AppInjectableTrait;
-
-
-
-    /**
-     * @var string $db a sample member variable that gets initialised
-     */
-    private $db = "not active";
-
-
-
-    /**
-     * The initialize method is optional and will always be called before the
-     * target method/action. This is a convienient method where you could
-     * setup internal properties that are commonly used by several methods.
-     *
-     * @return void
-     */
-    public function initialize() : void
-    {
-        // Use to initialise member variables.
-        $this->db = "active";
-
-        // Use $this->app to access the framework services.
-    }
-
 
 
     /**
@@ -88,16 +63,19 @@ class DiceController implements AppInjectableInterface
      * ANY METHOD mountpoint/
      * ANY METHOD mountpoint/index
      *
-     * @return string
+     * @return object
      */
-    public function initActionPost() : string
+    public function initActionPost() : object
     {
         // init the session for the game;
-        $name = $_POST["name"];
-        $dices = $_POST["dices"];
+        $request = $this->app->request;
+
+        $name = $request->getPost("name", "Player");
+        $dices = $request->getPost("dices", 3);
 
         $diceGame = new DiceGame($name, $dices);
-        $_SESSION["diceGame"] = $diceGame;
+
+        $this->app->session->set("diceGame", $diceGame);
 
         return $this->app->response->redirect("dice100/play");
     }
@@ -116,14 +94,32 @@ class DiceController implements AppInjectableInterface
     {
         $title = "Play the game";
 
-        $game = $_SESSION["diceGame"] ?? null;
+        $game = $this->app->session->get("diceGame");
+
         $score = $game->getTotalScore();
         $players = $game->getPlayers();
+        $playerName = $game->getCurrentPlayerName();
+        $checkGame = $game->checkGame();
+        $currentPlayer = $game->getCurrentPlayer();
+        $dices = $game->getValues();
+        $histogram = $game->getHistogram();
+        $sum = $game->getSum();
+        $currentScore = $game->getCurrentScore();
+        $rollCount = $game->getRollCount();
+        $checkOne = $game->checkOne();
 
         $data = [
-            "game" => $game,
+            "sum" => $sum,
+            "dices" => $dices,
             "score" => $score,
             "players" => $players,
+            "checkOne" => $checkOne,
+            "rollCount" => $rollCount,
+            "checkGame" => $checkGame,
+            "playerName" => $playerName,
+            "currentScore" => $currentScore,
+            "currentPlayer" => $currentPlayer,
+            "histogram" => $histogram
         ];
 
         $this->app->page->add("dice100/play", $data);
@@ -141,21 +137,19 @@ class DiceController implements AppInjectableInterface
      * ANY METHOD mountpoint/
      * ANY METHOD mountpoint/index
      *
-     * @return string
+     * @return object
      */
-    public function playActionPost() : string
+    public function playActionPost() : object
     {
-        $game = $_SESSION["diceGame"];
-        $save = $_POST["save"] ?? null;
-        $doit = $_POST["doit"] ?? null;
-        $reset = $_POST["reset"] ?? null;
-        $next = $_POST["next"] ?? null;
-        $computer = $_POST["computer"] ?? null;
+        $request = $this->app->request;
 
-        $_SESSION["doit"] = $doit;
-        $_SESSION["save"] = $save;
+        $game = $this->app->session->get("diceGame");
+        $save = $request->getPost("save");
+        $doIt = $request->getPost("doIt");
+        $reset = $request->getPost("reset");
+        $next = $request->getPost("next");
+        $computer = $request->getPost("computer");
 
-        // var_dump($_SESSION);
         if ($reset) {
             return $this->app->response->redirect("dice100/init");
         } elseif ($game->checkWinner()) {
@@ -169,8 +163,10 @@ class DiceController implements AppInjectableInterface
             $game->nextPlayer();
             $game->roll();
             return $this->app->response->redirect("dice100/play");
-        } elseif ($doit) {
+        } elseif ($doIt) {
             $game->roll();
+            return $this->app->response->redirect("dice100/play");
+        } else {
             return $this->app->response->redirect("dice100/play");
         }
     }
@@ -186,10 +182,11 @@ class DiceController implements AppInjectableInterface
      */
     public function saveAction() : object
     {
-        $game = $_SESSION["diceGame"] ?? null;
-
+        $game = $this->app->session->get("diceGame");
         $game->saveTotalScore();
-        if ($game->checkWinner()) {
+        $winner = $game->checkWinner();
+
+        if ($winner) {
             return $this->app->response->redirect("dice100/playwin");
         } else {
             $game->nextPlayer();
@@ -210,14 +207,17 @@ class DiceController implements AppInjectableInterface
     {
         $title = "Win or loose";
 
-        $game = $_SESSION["diceGame"] ?? null;
+        $game = $this->app->session->get("diceGame");
         $score = $game->getTotalScore();
         $players = $game->getPlayers();
+        $playerName = $game->getCurrentPlayerName();
+        $histogram = $game->getHistogram();
 
         $data = [
-            "game" => $game,
             "score" => $score,
             "players" => $players,
+            "playerName" => $playerName,
+            "histogram" => $histogram
         ];
 
         $this->app->page->add("dice100/playwin", $data);

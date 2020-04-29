@@ -11,12 +11,13 @@ namespace Anax\View;
 
 ?>
 
-
-<div class="gameHeader">
+<div class="gameDiceArea">
+<div class="gameHeaderDice">
     <p>Dicegame 100</p>
 </div>
-<div class="gameDiceScore">
+<div class="dicePlayArea">
 
+    <div class="gameDiceScoreHist">
     <table>
         <tr>
         <?php foreach ($players as $value) : ?>
@@ -29,11 +30,13 @@ namespace Anax\View;
         <?php endforeach; ?>
     </tr>
     </table>
+    <h3>Histogram</h3>
+    <?= $histogram->getAsText() ?>
 </div>
 
 <div class="gameDice">
     <h2>
-        <?= $game->getCurrentPlayerName() ?> Wins!
+        <?= $playerName ?> Wins!
     </h2>
 
     <form class="postFormDice" action="play" method="post">
@@ -42,5 +45,5 @@ namespace Anax\View;
 
 
 </div>
-
+</div>
 </div>

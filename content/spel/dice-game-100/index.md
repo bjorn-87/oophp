@@ -5,9 +5,7 @@ Tärningsspelet 100 v2 kmom04
 #####Spelregler tärningsspelet 100
 Följande är generella regler för tärningsspelet 100.
 
-Man kan vara två eller fler spelare. Man kan spela med en eller flera tärningar.
-
-Alla spelare kastar en tärning och den som får högst börjar spelet med en spelrunda.
+Man kan spela med en eller flera tärningar.
 
 Notera alla spelare på ett papper, protokollet, det gäller att först samla på sig 100 poäng.
 

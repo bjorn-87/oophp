@@ -1,5 +1,5 @@
 <?php
-namespace Bjos\Dice;
+namespace Bjos\Dice100;
 
 /**
  * DiceHand class consists of dices.

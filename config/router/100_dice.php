@@ -7,7 +7,7 @@ return [
         [
             "info" => "Dice controller",
             "mount" => "dice100",
-            "handler" => "\Bjos\Dice\DiceController",
+            "handler" => "\Bjos\Dice100\DiceController",
         ],
     ]
 ];

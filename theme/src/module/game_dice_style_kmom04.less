@@ -1,0 +1,111 @@
+/*!
+ * Style for the guess game in kmom02.
+ *
+ * This stylesheet is for the oophp course and kmom02. Fill it with style
+ * to style up the website so it is useable.
+ */
+
+.gameDiceScore {
+    #desinax-vgrid.column(@columns - 6);
+    #desinax-vgrid.push(3);
+    margin-top: 2em;
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: center;
+    box-shadow: 1px 1px 10px #333;
+}
+
+.gameDiceScoreHist {
+    #desinax-vgrid.column(@columns - 6);
+    margin-top: 2em;
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: left;
+    box-shadow: 1px 1px 10px #333;
+}
+
+.gameHeaderDice {
+    #desinax-vgrid.column(@columns);
+    background-color: #333;
+    border: 1px solid;
+    margin-top: 1em;
+    text-align: center;
+    box-shadow: 1px 1px 10px #333;
+    color: #fff;
+}
+
+.gameHeaderDice p {
+    font-size: 32px;
+    margin: 32px 0;
+}
+
+.gameDiceScoreHist table {
+    text-align: center;
+}
+
+.gameDiceArea {
+    #desinax-vgrid.column(@columns);
+    box-shadow: 1px 1px 10px #333;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+.dicePlayArea {
+    #desinax-vgrid.column(@columns);
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+}
+
+.gameDiceScore table {
+    padding: 1em;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+.gameDiceScore tr {
+    padding: 1em;
+    border: 1px solid black;
+}
+
+.gameDice {
+    #desinax-vgrid.column(@columns - 6);
+    #desinax-vgrid.push(3);
+    margin-bottom: 2em;
+    padding: 1em;
+    text-align: center;
+    min-height: 25em;
+}
+
+.gameDiceInit {
+    #desinax-vgrid.column(@columns - 6);
+    #desinax-vgrid.push(3);
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 1em;
+    min-height: 25em;
+    box-shadow: 1px 1px 10px #333;
+}
+
+form.postFormDice {
+    width: 100%;
+    margin: 24px auto;
+}
+
+form.postFormDice input[type=submit] {
+    height: 30px;
+    margin: 10px;
+    width: 10em;
+    display: inline-block;
+}
+
+form.postFormDice input[type=number],
+form.postFormDice input[type=text] {
+    height: 30px;
+    margin: 10px;
+    display: block;
+    width: 60%;
+}
+
+form label {
+    display: block;
+}

@@ -7,13 +7,17 @@ namespace Anax\View;
  */
 
 // Show incoming variables and view helper functions
-//echo showEnvironment(get_defined_vars(), get_defined_functions());
+// echo showEnvironment(get_defined_vars(), get_defined_functions());
 
 ?>
-<div class="gameHeader">
-    <p>Dicegame 100</p>
-</div>
-<div class="gameDiceScore">
+<div class="gameDiceArea">
+    <div class="gameHeaderDice">
+        <p>Dicegame 100</p>
+    </div>
+<div class="dicePlayArea">
+
+
+<div class="gameDiceScoreHist">
     <table>
         <tr>
         <?php foreach ($players as $value) : ?>
@@ -26,37 +30,40 @@ namespace Anax\View;
         <?php endforeach; ?>
     </tr>
 </table>
+    <h3>Histogram</h3>
+    <?= $histogram->getAsText() ?>
 </div>
 
 
 <div class="gameDice">
     <h2>
-        Current player: <?= $game->getCurrentPlayerName() ?>
+        Current player: <?= $playerName ?>
     </h2>
-    <?php if ($game->checkGame()) : ?>
-        <p>Last roll: <?= implode(", ", $game->getValues()) ?></p>
-        <p>Sum of throw: <?= $game->getSum() ?></p>
-        <p>Total points: <?= $game->getCurrentScore() ?></p>
-        <?php if ($game->getCurrentPlayer() !== 0) : ?>
-            <p>computer rolled: <?= $game->getRollCount() ?> times.</p>
+    <?php if ($checkGame) : ?>
+        <p>Last roll: <?= implode(", ", $dices) ?></p>
+        <p>Sum of throw: <?= $sum ?></p>
+        <p>Total points: <?= $currentScore ?></p>
+        <?php if ($currentPlayer !== 0) : ?>
+            <p>computer rolled: <?= $rollCount ?> times.</p>
         <?php endif; ?>
     <?php endif; ?>
 
 
+
     <form class="postFormDice" method="post">
-        <?php if (!$game->checkOne()) : ?>
-            <?php if ($game->getCurrentPlayer() === 0) : ?>
-                <input type="submit" name="doit" value="Roll">
-                <?php if ($game->checkGame()) : ?>
+        <?php if (!$checkOne) : ?>
+            <?php if ($currentPlayer === 0) : ?>
+                <input type="submit" name="doIt" value="Roll">
+                <?php if ($checkGame) : ?>
                     <input type="submit" name="save" value="save">
                 <?php endif; ?>
-            <?php elseif ($game->getCurrentPlayer() !== 0 && !$game->checkGame()) : ?>
-                <input type="submit" name="doit" value="Roll for computer">
+            <?php elseif ($currentPlayer !== 0 && !$checkGame) : ?>
+                <input type="submit" name="doIt" value="Roll for computer">
             <?php else : ?>
                 <input type="submit" name="next" value="Players turn">
             <?php endif; ?>
         <?php else : ?>
-                <?php if ($game->getCurrentPlayer() === 0) : ?>
+                <?php if ($currentPlayer === 0) : ?>
                     <p>Sorry you got 1 and looses all points!</p>
                     <input type="submit" name="computer" value="Roll for computer">
                 <?php else : ?>
@@ -66,4 +73,6 @@ namespace Anax\View;
         <?php endif; ?>
         <input type="submit" name="reset" value="reset">
     </form>
+</div>
+</div>
 </div>

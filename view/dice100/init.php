@@ -23,7 +23,7 @@ namespace Anax\View;
         <input type="text" name="name" value="Player" required>
         <br>
         <br>
-        <input type="submit" name="doit" value="Starta spel">
+        <input type="submit" name="doIt" value="Starta spel">
     </form>
 
 
