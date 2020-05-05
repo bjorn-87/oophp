@@ -11,7 +11,7 @@ namespace Anax\View;
 ?>
 
 <navbar class="navbar">
-    <!-- <a href="movie/show-all">Show all movies</a> | -->
+    <a href="movie/show-all">Show all movies</a> |
     <!-- <a href="movie/reset">Reset database</a> | -->
     <!-- <a href="movie/search-title">Search title</a> | -->
     <!-- <a href="movie/search-year">Search year</a> | -->

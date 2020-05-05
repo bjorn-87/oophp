@@ -42,4 +42,30 @@ class MovieController implements AppInjectableInterface
             "title" => $title,
         ]);
     }
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function showAllActionGet() : object
+    {
+        $title = "Show all";
+
+        $this->app->db->connect();
+        $sql = "SELECT * FROM movie;";
+        $res = $this->app->db->executeFetchAll($sql);
+
+        $this->app->page->add("movie/navbar");
+        $this->app->page->add("movie/show-all", [
+            "resultset" => $res,
+        ]);
+
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
 }
