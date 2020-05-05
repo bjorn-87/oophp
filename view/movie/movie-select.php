@@ -19,7 +19,7 @@ namespace Anax\View;
         <select name="movieId">
             <option value="">Select movie...</option>
             <?php foreach ($movies as $movie) : ?>
-            <option value="<?= $movie->id ?>"><?= $movie->title ?></option>
+            <option value="<?= $movie->id ?>"><?= htmlentities($movie->title) ?></option>
             <?php endforeach; ?>
         </select>
     </label>
@@ -30,6 +30,5 @@ namespace Anax\View;
         <input type="submit" name="doEdit" value="Edit">
         <input type="submit" name="doDelete" value="Delete">
     </p>
-    <p><a href="?">Show all</a></p>
     </fieldset>
 </form>

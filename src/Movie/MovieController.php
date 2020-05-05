@@ -145,6 +145,7 @@ class MovieController implements AppInjectableInterface
     }
 
 
+
     /**
      * This is the index method action, it handles:
      * ANY METHOD mountpoint
@@ -171,6 +172,8 @@ class MovieController implements AppInjectableInterface
         ]);
     }
 
+
+
     /**
      * This is the index method action, it handles:
      * ANY METHOD mountpoint
@@ -191,9 +194,9 @@ class MovieController implements AppInjectableInterface
         $doDelete = $request->getPost("doDelete");
         $doAdd = $request->getPost("doAdd");
 
-        var_dump($_POST);
+        // var_dump($_POST);
 
-        if (isset($doEdit) && $movieId !== "") {
+        if (isset($doEdit) && is_numeric($movieId)) {
             $this->app->session->set("movieId", $movieId);
             return $this->app->response->redirect("movie/movie-edit");
         } elseif (isset($doDelete)) {
@@ -235,10 +238,15 @@ class MovieController implements AppInjectableInterface
 
         $this->app->page->add("movie/navbar");
         $this->app->page->add("movie/movie-edit", [
-            "title" => $title,
             "movie" => $movie,
         ]);
+
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
     }
+
+
 
     /**
      * This is the index method action, it handles:

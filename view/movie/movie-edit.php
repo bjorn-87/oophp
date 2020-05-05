@@ -13,23 +13,23 @@ namespace Anax\View;
 <form method="post">
     <fieldset>
     <legend>Edit</legend>
-    <?= var_dump($movie) ?>
-    <input type="hidden" name="movieId" value="<?= $movie->id ?>"/>
+    <!-- <?= var_dump($movie) ?> -->
+    <input type="hidden" name="movieId" value="<?= htmlentities($movie->id) ?>"/>
 
     <p>
         <label>Title:<br>
-        <input type="text" name="movieTitle" value="<?= $movie->title ?>"/>
+        <input type="text" name="movieTitle" value="<?= htmlentities($movie->title) ?>"/>
         </label>
     </p>
 
     <p>
         <label>Year:<br>
-        <input type="number" name="movieYear" min="1" required value="<?= $movie->year ?>"/>
+        <input type="number" name="movieYear" min="1" required value="<?= htmlentities($movie->year) ?>"/>
     </p>
 
     <p>
         <label>Image:<br>
-        <input type="text" name="movieImage" value="<?= $movie->image ?>"/>
+        <input type="text" name="movieImage" value="<?= htmlentities($movie->image) ?>"/>
         </label>
     </p>
 
@@ -38,8 +38,7 @@ namespace Anax\View;
         <input type="reset" value="Reset">
     </p>
     <p>
-        <a href="?route=movie-select">Select movie</a> |
-        <a href="?">Show all</a>
+        <a href="movie-select">Tillbaka</a>
     </p>
     </fieldset>
 </form>

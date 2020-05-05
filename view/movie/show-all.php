@@ -25,10 +25,10 @@ if (!$resultset) {
     $id++; ?>
     <tr>
         <td><?= $id ?></td>
-        <td><?= $row->id ?></td>
-        <td><img class="thumb" src="../image/movie/<?= $row->image ?>?w=200&a=4,27,11,0&cf&sharpen"></td>
-        <td><?= $row->title ?></td>
-        <td><?= $row->year ?></td>
+        <td><?= htmlentities($row->id) ?></td>
+        <td><img class="thumb" src="../image/movie/<?= htmlentities($row->image) ?>?w=200&a=4,27,11,0&cf&sharpen"></td>
+        <td><?= htmlentities($row->title) ?></td>
+        <td><?= htmlentities($row->year) ?></td>
     </tr>
 <?php endforeach; ?>
 </table>
