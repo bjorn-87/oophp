@@ -10,7 +10,9 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 
 ?>
+<h1>Återställ databasen</h1>
+
 <form method="post">
-    <input type="submit" name="reset" value="Reset database">
+    <input type="submit" name="reset" value="Reset">
     <?= $output ?>
 </form>

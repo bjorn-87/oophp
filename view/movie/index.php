@@ -15,8 +15,8 @@ namespace Anax\View;
     <a href="movie/reset">Reset database</a> |
     <!-- <a href="movie/search-title">Search title</a> | -->
     <!-- <a href="movie/search-year">Search year</a> | -->
-    <!-- <a href="movie/movie-select">Select</a> | -->
-    <!--    <a href="?route=movie-edit">Edit</a> | -->
+    <a href="movie/movie-select">Select</a> |
+       <!-- <a href="?route=movie-edit">Edit</a> | -->
     <!-- <a href="show-all-sort">Show all sortable</a> | -->
     <!-- <a href="?route=show-all-paginate">Show all paginate</a> | -->
 </navbar>

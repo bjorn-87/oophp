@@ -93,7 +93,7 @@ class MovieController implements AppInjectableInterface
 
         return $this->app->page->render([
             "title" => $title,
-       ]);
+        ]);
     }
 
 
@@ -109,11 +109,13 @@ class MovieController implements AppInjectableInterface
     public function resetActionPost()
     {
         $request = $this->app->request;
+
         // Restore the database to its original settings
         $file   = ANAX_INSTALL_PATH . "/sql/movie/setup.sql";
         $mysql  = "mysql";
         $output = null;
         $reset = $request->getPost("reset");
+        $res = "";
         $databaseConfig = $this->app->configuration->load("database")["config"];
 
         // Extract hostname and databasename from dsn
@@ -137,9 +139,133 @@ class MovieController implements AppInjectableInterface
             // $output = "The command exit status was $status."
             //     . "<br>The output from the command was:</p><pre>"
             //     . print_r($output, 1);
+            $this->app->session->set("output", $res);
+            return $this->app->response->redirect("movie/reset");
+        }
+    }
 
-        $this->app->session->set("output", $res);
-        return $this->app->response->redirect("movie/reset");
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function movieSelectActionGet() : object
+    {
+        $title = "Select";
+
+        $this->app->db->connect();
+        $sql = "SELECT * FROM movie;";
+        $movies = $this->app->db->executeFetchAll($sql);
+
+        $this->app->page->add("movie/navbar");
+        $this->app->page->add("movie/movie-select", [
+            "movies" => $movies,
+        ]);
+
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function movieSelectActionPost() : object
+    {
+        $request = $this->app->request;
+        $db = $this->app->db;
+
+        $db->connect();
+
+        $movieId = $request->getPost("movieId");
+        $doEdit = $request->getPost("doEdit");
+        $doDelete = $request->getPost("doDelete");
+        $doAdd = $request->getPost("doAdd");
+
+        var_dump($_POST);
+
+        if (isset($doEdit) && $movieId !== "") {
+            $this->app->session->set("movieId", $movieId);
+            return $this->app->response->redirect("movie/movie-edit");
+        } elseif (isset($doDelete)) {
+            $sql = "DELETE FROM movie WHERE id = ?;";
+            $db->execute($sql, [$movieId]);
+
+            return $this->app->response->redirect("movie/movie-select");
+        } elseif (isset($doAdd)) {
+            $sql = "INSERT INTO movie (title, year, image) VALUES (?, ?, ?);";
+            $db->execute($sql, ["A title", 2017, "img/noimage.png"]);
+            $movieId = $db->lastInsertId();
+            $this->app->session->set("movieId", $movieId);
+
+            return $this->app->response->redirect("movie/movie-edit");
+        }
+        return $this->app->response->redirect("movie/movie-select");
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function movieEditActionGet() : object
+    {
+        $title = "Update movie";
+
+        $this->app->db->connect();
+        $movieId = $this->app->session->get("movieId");
+
+        $sql = "SELECT * FROM movie WHERE id = ?;";
+        $movie = $this->app->db->executeFetchAll($sql, [$movieId]);
+        $movie = $movie[0];
+
+        $this->app->page->add("movie/navbar");
+        $this->app->page->add("movie/movie-edit", [
+            "title" => $title,
+            "movie" => $movie,
+        ]);
+    }
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function movieEditActionPost() : object
+    {
+        $request = $this->app->request;
+        $db = $this->app->db;
+
+        $this->app->db->connect();
+
+        $doSave = $request->getPost("doSave");
+        $movieId = $request->getPost("movieId");
+        $movieTitle = $request->getPost("movieTitle");
+        $movieYear = $request->getPost("movieYear");
+        $movieImage = $request->getPost("movieImage");
+
+        if (isset($doSave)) {
+            $sql = "UPDATE movie SET title = ?, year = ?, image = ? WHERE id = ?;";
+            $db->execute($sql, [$movieTitle, $movieYear, $movieImage, $movieId]);
+
+            return $this->app->response->redirect("movie/movie-edit");
         }
     }
 }
