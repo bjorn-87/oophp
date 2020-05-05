@@ -84,6 +84,11 @@ return [
             "title" => "Anax development utilities",
         ],
         [
+            "text" => "Movie",
+            "url" => "movie",
+            "title" => "Movie database",
+        ],
+        [
             "text" => "Spel",
             "url" => "spel",
             "title" => "Spel",
