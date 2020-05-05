@@ -14,7 +14,7 @@ namespace Anax\View;
 <form method="get">
     <fieldset>
     <legend>Search</legend>
-    <input type="hidden" name="route" value="search-year">
+    <!-- <input type="hidden" name="route" value="search-year"> -->
     <p>
         <label>Created between:
         <input type="number" name="year1" value="<?= $year1 ?: 1900 ?>" min="1900" max="2100"/>

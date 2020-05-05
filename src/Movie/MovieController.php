@@ -276,4 +276,92 @@ class MovieController implements AppInjectableInterface
             return $this->app->response->redirect("movie/movie-edit");
         }
     }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function searchTitleActionGet() : object
+    {
+        $request = $this->app->request;
+
+        $title = "Search title";
+        $resultset = null;
+
+        $this->app->db->connect();
+        $searchTitle = $request->getGet("searchTitle");
+        // var_dump($searchTitle);
+
+        if (isset($searchTitle)) {
+            $sql = "SELECT * FROM movie WHERE title LIKE ?;";
+            $resultset = $this->app->db->executeFetchAll($sql, [$searchTitle]);
+        }
+
+        $this->app->page->add("movie/navbar");
+        $this->app->page->add("movie/search-title", [
+            "searchTitle" => $searchTitle,
+        ]);
+        $this->app->page->add("movie/show-all", [
+            "resultset" => $resultset
+        ]);
+
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function searchYearActionGet() : object
+    {
+        $request = $this->app->request;
+
+        $title = "Search year";
+        $resultset = null;
+
+        $this->app->db->connect();
+
+        $year1 = $request->getGet("year1");
+        $year2 = $request->getGet("year2");
+        // var_dump($year1);
+        // var_dump($year2);
+
+        if ($year1 && $year2) {
+            $sql = "SELECT * FROM movie WHERE year >= ? AND year <= ?;";
+            $resultset = $this->app->db->executeFetchAll($sql, [$year1, $year2]);
+        } elseif ($year1) {
+            $sql = "SELECT * FROM movie WHERE year >= ?;";
+            $resultset = $this->app->db->executeFetchAll($sql, [$year1]);
+        } elseif ($year2) {
+            $sql = "SELECT * FROM movie WHERE year <= ?;";
+            $resultset = $this->app->db->executeFetchAll($sql, [$year2]);
+        }
+
+        $this->app->page->add("movie/navbar");
+        $this->app->page->add("movie/search-year", [
+            "year1" => $year1,
+            "year2" => $year2,
+        ]);
+        $this->app->page->add("movie/show-all", [
+            "resultset" => $resultset
+        ]);
+
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
 }
