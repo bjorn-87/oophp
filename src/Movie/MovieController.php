@@ -68,4 +68,78 @@ class MovieController implements AppInjectableInterface
             "title" => $title,
         ]);
     }
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function resetActionGet() : object
+    {
+        $title = "reset";
+        $output = $this->app->session->getOnce("output");
+        $db = $this->app;
+        $dbConf = $this->app->configuration->load("database");
+
+        $this->app->page->add("movie/navbar");
+        $this->app->page->add("movie/reset", [
+            "output" => $output,
+            "db" => $db,
+            "dbConf" => $dbConf,
+        ]);
+
+        return $this->app->page->render([
+            "title" => $title,
+       ]);
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return
+     */
+    public function resetActionPost()
+    {
+        $request = $this->app->request;
+        // Restore the database to its original settings
+        $file   = ANAX_INSTALL_PATH . "/sql/movie/setup.sql";
+        $mysql  = "mysql";
+        $output = null;
+        $reset = $request->getPost("reset");
+        $databaseConfig = $this->app->configuration->load("database")["config"];
+
+        // Extract hostname and databasename from dsn
+        $dsnDetail = [];
+        preg_match("/mysql:host=(.+);dbname=([^;.]+)/", $databaseConfig["dsn"], $dsnDetail);
+        $host = $dsnDetail[1];
+        $database = $dsnDetail[2];
+        $login = $databaseConfig["username"];
+        $password = $databaseConfig["password"];
+
+        if (isset($reset)) {
+            $command = "$mysql -h{$host} -u{$login} -p{$password} $database < $file 2>&1";
+            $output = [];
+            $status = null;
+            exec($command, $output, $status);
+            if ($status === 0) {
+                $res = "<p>Databasen är återställd</p>";
+            } else {
+                $res = "<p>Något gick fel, databasen är ej återställd</p>";
+            }
+            // $output = "The command exit status was $status."
+            //     . "<br>The output from the command was:</p><pre>"
+            //     . print_r($output, 1);
+
+        $this->app->session->set("output", $res);
+        return $this->app->response->redirect("movie/reset");
+        }
+    }
 }
