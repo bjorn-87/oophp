@@ -10,13 +10,19 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 ?>
 
-<navbar class="navbar">
-    <a href="movie/show-all">Show all movies</a> |
-    <a href="movie/reset">Reset database</a> |
-    <a href="movie/search-title">Search title</a> |
-    <a href="movie/search-year">Search year</a> |
-    <a href="movie/movie-select">Select</a> |
+<navbar class="navbarMovie">
+    <a href="movie/show-all">Visa alla</a>
+    <a href="movie/show-all-paginate">visa alla (paginate)</a>
+    <a href="movie/search-title">Sök på titel</a>
+    <a href="movie/search-year">Sök på år</a>
+    <a href="movie/reset">Återställ</a>
+    <a href="movie/movie-select">Admin</a> 
        <!-- <a href="?route=movie-edit">Edit</a> | -->
     <!-- <a href="show-all-sort">Show all sortable</a> | -->
-    <!-- <a href="?route=show-all-paginate">Show all paginate</a> | -->
 </navbar>
+
+<div class="movieIndex">
+    <h1>Filmdatabas</h1>
+    <p>Välkommen till min filmdatabas.</p>
+    <p>Här kan du söka på titlar</p>
+</div>

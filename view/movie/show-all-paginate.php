@@ -14,19 +14,19 @@ $defaultRoute = "?";
 <table>
     <tr class="first">
         <th>Rad</th>
-        <th>Id <?= orderby2("id", $defaultRoute) ?></th>
-        <th>Bild <?= orderby2("image", $defaultRoute) ?></th>
-        <th>Titel <?= orderby2("title", $defaultRoute) ?></th>
-        <th>År <?= orderby2("year", $defaultRoute) ?></th>
+        <th>Id <?= orderby("id", $defaultRoute) ?></th>
+        <th>Bild <?= orderby("image", $defaultRoute) ?></th>
+        <th>Titel <?= orderby("title", $defaultRoute) ?></th>
+        <th>År <?= orderby("year", $defaultRoute) ?></th>
     </tr>
 <?php $id = -1; foreach ($resultset as $row) :
     $id++; ?>
     <tr>
         <td><?= $id ?></td>
-        <td><?= $row->id ?></td>
-        <td><img class="thumb" src="<?= $row->image ?>"></td>
-        <td><?= $row->title ?></td>
-        <td><?= $row->year ?></td>
+        <td><?= htmlentities($row->id) ?></td>
+        <td><img class="thumb" src="../image/movie/<?= htmlentities($row->image) ?>?w=150&h=100&cf&sharpen"></td>
+        <td><?= htmlentities($row->title) ?></td>
+        <td><?= htmlentities($row->year) ?></td>
     </tr>
 <?php endforeach; ?>
 </table>

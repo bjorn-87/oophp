@@ -23,6 +23,7 @@ class MovieController implements AppInjectableInterface
     use AppInjectableTrait;
 
 
+
     /**
      * This is the index method action, it handles:
      * ANY METHOD mountpoint
@@ -43,11 +44,10 @@ class MovieController implements AppInjectableInterface
         ]);
     }
 
+
+
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Shows all movies
      *
      * @return object
      */
@@ -69,11 +69,10 @@ class MovieController implements AppInjectableInterface
         ]);
     }
 
+
+
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Reset the database to default GET.
      *
      * @return object
      */
@@ -99,10 +98,7 @@ class MovieController implements AppInjectableInterface
 
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Reset the database to default POST.
      *
      * @return
      */
@@ -147,10 +143,7 @@ class MovieController implements AppInjectableInterface
 
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Method for CRUD on the database GET.
      *
      * @return object
      */
@@ -175,10 +168,7 @@ class MovieController implements AppInjectableInterface
 
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Method for CRUD on the database POST.
      *
      * @return object
      */
@@ -218,10 +208,7 @@ class MovieController implements AppInjectableInterface
 
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Edit movie GET
      *
      * @return object
      */
@@ -249,10 +236,7 @@ class MovieController implements AppInjectableInterface
 
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Edit movie POST.
      *
      * @return object
      */
@@ -280,10 +264,7 @@ class MovieController implements AppInjectableInterface
 
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Search among movies by title.
      *
      * @return object
      */
@@ -319,10 +300,7 @@ class MovieController implements AppInjectableInterface
 
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Search among movies by year.
      *
      * @return object
      */
@@ -358,6 +336,95 @@ class MovieController implements AppInjectableInterface
         ]);
         $this->app->page->add("movie/show-all", [
             "resultset" => $resultset
+        ]);
+
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
+
+
+
+    /**
+     * Shows if the database is empty.
+     *
+     * @return object
+     */
+    public function showAllEmptyActionGet() : object
+    {
+        $title = "Show all";
+
+        $max = $this->app->session->get("max");
+
+        if ($max > 0) {
+            return $this->app->response->redirect("movie/show-all-paginate");
+        }
+        $this->app->page->add("movie/navbar");
+        $this->app->page->add("movie/show-all-empty");
+
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
+
+
+
+    /**
+     * Shows all movies with pagination and sorting.
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @return object
+     */
+    public function showAllPaginateActionGet() : object
+    {
+        $request = $this->app->request;
+        $db = $this->app->db;
+
+        $title = "Search all";
+        $resultset = null;
+
+        $db->connect();
+
+        // Get number of hits per page
+        $hits = $request->getGet("hits", 4);
+        if (!(is_numeric($hits) && $hits > 0 && $hits <= 8)) {
+            return $this->app->response->redirect("movie/show-all-paginate");
+        }
+
+        // Get max number of pages
+        $sql = "SELECT COUNT(id) AS max FROM movie;";
+        $max = $db->executeFetchAll($sql);
+        $max = ceil($max[0]->max / $hits);
+        // var_dump($max);
+
+        // Get current page
+        $page = $request->getGet("page", 1);
+        if (!(is_numeric($hits) && $page > 0 && $page <= $max)) {
+            $this->app->session->set("max", $max);
+            return $this->app->response->redirect("movie/show-all-empty");
+        }
+        $offset = $hits * ($page - 1);
+
+        // Only these values are valid
+        $columns = ["id", "title", "year", "image"];
+        $orders = ["asc", "desc"];
+
+        // Get settings from GET or use defaults
+        $orderBy = $request->getGet("orderby") ?: "id";
+        $order = $request->getGet("order") ?: "asc";
+
+        //Incoming matches valid value sets
+        if (!(in_array($orderBy, $columns) && in_array($order, $orders))) {
+            return $this->app->response->redirect("movie/show-all-paginate");
+        }
+
+        $sql = "SELECT * FROM movie ORDER BY $orderBy $order LIMIT $hits OFFSET $offset;";
+        $resultset = $db->executeFetchAll($sql);
+
+        $this->app->page->add("movie/navbar");
+        $this->app->page->add("movie/show-all-paginate", [
+            "resultset" => $resultset,
+            "max" => $max
         ]);
 
         return $this->app->page->render([
