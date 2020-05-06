@@ -10,9 +10,13 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 
 ?>
+<div class="movieIndex">
+
 <h1>Återställ databasen</h1>
 
-<form method="post">
+<form class="movieForm" method="post">
     <input type="submit" name="reset" value="Reset">
     <?= $output ?>
 </form>
+
+</div>

@@ -9,8 +9,9 @@ namespace Anax\View;
 // Show incoming variables and view helper functions
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 ?>
-
-<form method="post">
+<div class="movieIndex">
+    <h2>Lägg till/uppdatera information</h2>
+<form class="movieForm" method="post">
     <fieldset>
     <legend>Edit</legend>
     <!-- <?= var_dump($movie) ?> -->
@@ -42,3 +43,4 @@ namespace Anax\View;
     </p>
     </fieldset>
 </form>
+</div>

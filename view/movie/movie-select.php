@@ -9,15 +9,16 @@ namespace Anax\View;
 // Show incoming variables and view helper functions
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 ?>
-
-<form method="post">
+<div class="movieIndex">
+    <h2>Admin</h2>
+<form class="movieForm" method="post">
     <fieldset>
-    <legend>Select Movie</legend>
+    <legend>Välj film</legend>
 
     <p>
-        <label>Movie:<br>
+        <label>Film:<br>
         <select name="movieId">
-            <option value="">Select movie...</option>
+            <option value="">Välj film...</option>
             <?php foreach ($movies as $movie) : ?>
             <option value="<?= $movie->id ?>"><?= htmlentities($movie->title) ?></option>
             <?php endforeach; ?>
@@ -32,3 +33,4 @@ namespace Anax\View;
     </p>
     </fieldset>
 </form>
+</div>

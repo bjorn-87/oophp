@@ -13,6 +13,8 @@ if (!$resultset) {
     return;
 }
 ?>
+<div class="movieIndex">
+    <h2>Alla filmer</h2>
 <table>
     <tr class="first">
         <th>Rad</th>
@@ -26,9 +28,10 @@ if (!$resultset) {
     <tr>
         <td><?= $id ?></td>
         <td><?= htmlentities($row->id) ?></td>
-        <td><img class="thumb" src="../image/movie/<?= htmlentities($row->image) ?>?w=200&a=4,27,11,0&cf&sharpen"></td>
+        <td><img class="thumb" src="../image/movie/<?= htmlentities($row->image) ?>?w=150&h=100&cf&sharpen"></td>
         <td><?= htmlentities($row->title) ?></td>
         <td><?= htmlentities($row->year) ?></td>
     </tr>
 <?php endforeach; ?>
 </table>
+</div>
