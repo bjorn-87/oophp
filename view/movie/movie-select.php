@@ -31,6 +31,7 @@ namespace Anax\View;
         <input type="submit" name="doEdit" value="Edit">
         <input type="submit" name="doDelete" value="Delete">
     </p>
+    <p class="backButtons"><a href="show-all">Visa alla</a></p>
     </fieldset>
 </form>
 </div>

@@ -24,6 +24,7 @@ namespace Anax\View;
     <p>
         <input type="submit" name="doSearch" value="Sök">
     </p>
+    <p class="backButtons"><a href="show-all">Visa alla</a></p>
     </fieldset>
 </form>
 </div>

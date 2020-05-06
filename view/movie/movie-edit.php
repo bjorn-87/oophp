@@ -38,8 +38,8 @@ namespace Anax\View;
         <input type="submit" name="doSave" value="Save">
         <input type="reset" value="Reset">
     </p>
-    <p>
-        <a href="movie-select">Tillbaka</a>
+    <p class="backButtons">
+        <a href="movie-select">Tillbaka</a> | <a href="show-all">Visa alla</a>
     </p>
     </fieldset>
 </form>
