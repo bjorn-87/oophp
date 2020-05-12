@@ -59,34 +59,14 @@ return [
             ],
         ],
         [
-            "text" => "Om",
-            "url" => "om",
-            "title" => "Om denna webbplats.",
-        ],
-        [
-            "text" => "Styleväljare",
-            "url" => "style",
-            "title" => "Välj stylesheet.",
-        ],
-        [
-            "text" => "Docs",
-            "url" => "dokumentation",
-            "title" => "Dokumentation av ramverk och liknande.",
-        ],
-        [
-            "text" => "Test &amp; Lek",
-            "url" => "lek",
-            "title" => "Testa och lek med test- och exempelprogram",
-        ],
-        [
-            "text" => "Anax dev",
-            "url" => "dev",
-            "title" => "Anax development utilities",
-        ],
-        [
             "text" => "Movie",
             "url" => "movie",
             "title" => "Movie database",
+        ],
+        [
+            "text" => "TextFilter",
+            "url" => "textfilter",
+            "title" => "TextFilter",
         ],
         [
             "text" => "Spel",
@@ -111,6 +91,40 @@ return [
                     ],
                 ],
             ],
+        ],
+        [
+            "text" => "Verktyg",
+            "url" => "verktyg",
+            "title" => "Verktyg",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Docs",
+                        "url" => "dokumentation",
+                        "title" => "Dokumentation av ramverk och liknande.",
+                    ],
+                    [
+                        "text" => "Test &amp; Lek",
+                        "url" => "lek",
+                        "title" => "Testa och lek med test- och exempelprogram",
+                    ],
+                    [
+                        "text" => "Anax dev",
+                        "url" => "dev",
+                        "title" => "Anax development utilities",
+                    ],
+                    [
+                        "text" => "Styleväljare",
+                        "url" => "style",
+                        "title" => "Välj stylesheet.",
+                    ],
+                ],
+            ],
+        ],
+        [
+            "text" => "Om",
+            "url" => "om",
+            "title" => "Om denna webbplats.",
         ],
     ],
 ];

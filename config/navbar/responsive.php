@@ -90,6 +90,11 @@ return [
             "title" => "Movie database",
         ],
         [
+            "text" => "TextFilter",
+            "url" => "textfilter",
+            "title" => "TextFilter",
+        ],
+        [
             "text" => "Spel",
             "url" => "spel",
             "title" => "Spel",
