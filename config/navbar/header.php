@@ -69,6 +69,11 @@ return [
             "title" => "TextFilter",
         ],
         [
+            "text" => "CMS",
+            "url" => "content",
+            "title" => "CMS",
+        ],
+        [
             "text" => "Spel",
             "url" => "spel",
             "title" => "Spel",
