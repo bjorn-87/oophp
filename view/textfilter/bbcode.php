@@ -10,6 +10,9 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 
 ?>
+<div class="movieIndex">
+
+
 <h1>Showing off BBCode</h1>
 
 <h2>Source in bbcode.txt</h2>
@@ -20,3 +23,5 @@ namespace Anax\View;
 
 <h2>Filter BBCode applied, HTML (including nl2br())</h2>
 <?= $bbcodeNl2br ?>
+
+</div>

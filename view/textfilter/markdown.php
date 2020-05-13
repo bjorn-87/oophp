@@ -10,7 +10,7 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 
 ?>
-
+<div class="movieIndex">
 <h1>Showing off Markdown</h1>
 
 <h2>Markdown source in sample.md</h2>
@@ -21,3 +21,4 @@ namespace Anax\View;
 
 <h2>Text displayed as HTML</h2>
 <?= $markDown ?>
+</div>

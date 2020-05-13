@@ -1,6 +1,6 @@
 <?php
 /**
- * Dice controller
+ * Textfilter controller
  */
 return [
     "routes" => [

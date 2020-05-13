@@ -10,6 +10,7 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 
 ?>
+<div class="movieIndex">
 
 <h1>Showing off Clickable</h1>
 
@@ -24,3 +25,5 @@ namespace Anax\View;
 
 <h2>Filter Clickable applied, HTML</h2>
 <?= $clickable ?>
+
+</div>
