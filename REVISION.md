@@ -82,3 +82,13 @@ v5.0.4 (2020-05-06)
 * Added style for movie database
 
 * Additional styling for movie database
+
+v6.0.0 (2020-05-11)
+
+* added TextFilter class
+
+* added Verktyg route to navbar
+
+v6.0.1 (2020-05-12)
+
+* Finished textfilter with testpages
