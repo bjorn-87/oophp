@@ -9,6 +9,7 @@ namespace Anax\View;
 // Show incoming variables and view helper functions
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 ?>
+<div class="movieIndex">
 
 <form method="post">
     <fieldset>
@@ -27,3 +28,5 @@ namespace Anax\View;
     </p>
     </fieldset>
 </form>
+
+</div>

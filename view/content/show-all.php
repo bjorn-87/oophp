@@ -20,14 +20,14 @@ if (!$resultset) {
 <?php $id = -1; foreach ($resultset as $row) :
     $id++; ?>
     <tr>
-        <td><?= $id ?></td>
-        <td><?= $row->id ?></td>
-        <td><?= $row->title ?></td>
-        <td><?= $row->type ?></td>
-        <td><?= $row->published ?></td>
-        <td><?= $row->created ?></td>
-        <td><?= $row->updated ?></td>
-        <td><?= $row->deleted ?></td>
+        <td><?= esc($id) ?></td>
+        <td><?= esc($row->id) ?></td>
+        <td><?= esc($row->title) ?></td>
+        <td><?= esc($row->type) ?></td>
+        <td><?= esc($row->published) ?></td>
+        <td><?= esc($row->created) ?></td>
+        <td><?= esc($row->updated) ?></td>
+        <td><?= esc($row->deleted) ?></td>
     </tr>
 <?php endforeach; ?>
 </table>

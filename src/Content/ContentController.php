@@ -78,7 +78,7 @@ class ContentController implements AppInjectableInterface
     {
         $title = "CMS Show all";
 
-        $res = $this->content->showAllContent();
+        $res = $this->content->showAllExistingContent();
 
         $this->app->page->add("content/header");
         $this->app->page->add("content/show-all", [
@@ -150,16 +150,14 @@ class ContentController implements AppInjectableInterface
             $status = null;
             exec($command, $output, $status);
             if ($status === 0) {
-                // $res = "<p>Databasen är återställd</p>";
-                $res = "The command exit status was $status."
-                    . "<br>The output from the command was:</p><pre>"
-                    . print_r($output, 1);
+                $res = "<p>Databasen är återställd</p>";
+                // $res = "The command exit status was $status."
+                //     . "<br>The output from the command was:</p><pre>"
+                //     . print_r($output, 1);
             } else {
                 $res = "<p>Något gick fel, databasen är ej återställd</p>";
             }
-            $output = "The command exit status was $status."
-                . "<br>The output from the command was:</p><pre>"
-                . print_r($output, 1);
+
             $this->app->session->set("output", $res);
             return $this->app->response->redirect("content/reset");
         }
@@ -226,7 +224,7 @@ class ContentController implements AppInjectableInterface
     {
         $request = $this->app->request;
 
-        $title = $request->getPost("doCreate");
+        $title = $request->getPost("contentTitle");
 
         $contentId = $this->content->createContent($title);
         $this->app->session->set("contentId", $contentId);
@@ -250,9 +248,6 @@ class ContentController implements AppInjectableInterface
 
         $max = $this->content->countContent();
         $contentId = $session->getOnce("contentId") ?: $request->getGet("id");
-        // var_dump($max);
-        // var_dump($contentId);
-        // var_dump($contentId > $max->max);
 
         $title = "Edit content";
 
@@ -351,5 +346,24 @@ class ContentController implements AppInjectableInterface
         return $this->app->page->render([
             "title" => $title,
         ]);
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function deleteActionPost() : object
+    {
+        $request = $this->app->request;
+        $id = $request->getPost("contentId");
+
+        $this->content->deleteContent($id);
+        return $this->app->response->redirect("content/show-all");
     }
 }

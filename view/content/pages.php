@@ -1,8 +1,22 @@
 <?php
+
+namespace Anax\View;
+
+/**
+ * Render content within an article.
+ */
+
+// Show incoming variables and view helper functions
+//echo showEnvironment(get_defined_vars(), get_defined_functions());
+?>
+
+<?php
 if (!$resultset) {
     return;
 }
 ?>
+
+<div class="movieIndex">
 
 <table>
     <tr class="first">
@@ -16,12 +30,14 @@ if (!$resultset) {
 <?php $id = -1; foreach ($resultset as $row) :
     $id++; ?>
     <tr>
-        <td><?= $row->id ?></td>
-        <td><a href="?route=<?= $row->path ?>"><?= $row->title ?></a></td>
-        <td><?= $row->type ?></td>
-        <td><?= $row->status ?></td>
-        <td><?= $row->published ?></td>
-        <td><?= $row->deleted ?></td>
+        <td><?= esc($row->id) ?></td>
+        <td><a href="<?= url("content/pages/page")?>/<?= esc($row->path) ?>"><?= esc($row->title) ?></a></td>
+        <td><?= esc($row->type) ?></td>
+        <td><?= esc($row->status) ?></td>
+        <td><?= esc($row->published) ?></td>
+        <td><?= esc($row->deleted) ?></td>
     </tr>
 <?php endforeach; ?>
 </table>
+
+</div>
