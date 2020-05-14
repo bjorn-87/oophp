@@ -4,7 +4,7 @@ namespace Bjos\Content;
 
 use Bjos\TextFilter\MyTextFilter;
 
-class ContentPage
+class ContentPost
 {
     /**
      * @var object $db database object.
@@ -14,9 +14,7 @@ class ContentPage
 
 
     /**
-     * Constructor for ContentPage
-     *
-     * @param object $db database object.
+     * @var object $db database object.
      */
     public function __construct($db)
     {
@@ -28,63 +26,55 @@ class ContentPage
 
 
     /**
-     * Method to get the value of the dice.
-     *
-     * @return int $value.
+     * @var object $db database object.
      */
-    public function showAllPages()
+    public function showAllPosts()
     {
         $sql = <<<EOD
 SELECT
     *,
-    CASE
-        WHEN (deleted <= NOW()) THEN "isDeleted"
-        WHEN (published <= NOW()) THEN "isPublished"
-        ELSE "notPublished"
-    END AS status
+    DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
+    DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
 FROM content
 WHERE type=?
+ORDER BY published DESC
 ;
 EOD;
-        $resultset = $this->db->executeFetchAll($sql, ["page"]);
+        $resultset = $this->db->executeFetchAll($sql, ["post"]);
         return $resultset;
     }
 
 
+
     /**
-     * Method to get the value of the dice.
-     *
-     * @return int $value.
+     * @var object $db database object.
      */
-    public function showPage($route)
+    public function showPost($slug)
     {
-        // Try matching content for type page and its path
         $sql = <<<EOD
 SELECT
 *,
-DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS modified_iso8601,
-DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS modified
+DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
+DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
 FROM content
 WHERE
-path = ?
+slug = ?
 AND type = ?
 AND (deleted IS NULL OR deleted > NOW())
 AND published <= NOW()
+ORDER BY published DESC
 ;
 EOD;
-        $content = $this->db->executeFetch($sql, [$route, "page"]);
+        $content = $this->db->executeFetch($sql, [$slug, "post"]);
 
         if ($content) {
             $filters = $content->filter;
             if ($filters) {
                 $arrayFilter = explode(",", $filters);
-
                 array_unshift($arrayFilter, "strip");
-
                 $content->data = $this->textFilter->parse($content->data, $arrayFilter);
             }
         }
-
         return $content;
     }
 }

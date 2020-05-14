@@ -10,10 +10,10 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 ?>
 
-<div class="movieIndex">
+<div class="contentIndex">
 
 
-<form method="post">
+<form class="contentForm" method="post">
     <fieldset>
     <legend>Edit</legend>
     <input type="hidden" name="contentId" value="<?= esc($content->id) ?>"/>
@@ -57,7 +57,7 @@ namespace Anax\View;
     <p>
         <button type="submit" name="doSave"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
         <button type="reset"><i class="fa fa-undo" aria-hidden="true"></i> Reset</button>
-        <button type="submit" name="doDelete"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+        <button type="submit" name="doDelete"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
     </p>
     <a href="<?= url("content/admin")?>">Tillbaka</a>
     </fieldset>

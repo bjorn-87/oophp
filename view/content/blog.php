@@ -9,7 +9,7 @@ namespace Anax\View;
 // Show incoming variables and view helper functions
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 ?>
-<div class="movieIndex">
+<div class="contentIndex">
 
 <?php
 if (!$resultset) {
@@ -22,7 +22,7 @@ if (!$resultset) {
 <?php foreach ($resultset as $row) : ?>
 <section>
     <header>
-        <h1><a href="?route=blog/<?= esc($row->slug) ?>"><?= esc($row->title) ?></a></h1>
+        <h1><a href="<?= url("content/blog/blogpost")?>/<?= esc($row->slug) ?>"><?= esc($row->title) ?></a></h1>
         <p><i>Published: <time datetime="<?= esc($row->published_iso8601) ?>" pubdate><?= esc($row->published) ?></time></i></p>
     </header>
     <?= esc($row->data) ?>

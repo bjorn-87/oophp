@@ -16,11 +16,11 @@ if (!$resultset) {
 }
 ?>
 
-<nav class="movieNavbar">
+<nav class="contentNavbar">
     <a href="<?= url("content/create")?>">Create</a>
     <a href="<?= url("content/reset")?>">Reset</a>
 </nav>
-<div class="movieIndex">
+<div class="contentIndex">
 
 <table>
     <tr class="first">

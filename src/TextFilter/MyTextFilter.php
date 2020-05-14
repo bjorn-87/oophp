@@ -23,6 +23,7 @@ class MyTextFilter
         "markdown"  => "markdown",
         "nl2br"     => "nl2br",
         "esc"     => "esc",
+        "strip"     => "strip",
     ];
 
 
@@ -146,5 +147,19 @@ class MyTextFilter
     public function esc($text)
     {
         return htmlentities($text);
+    }
+
+
+
+    /**
+     * Sanitize value for output in view.
+     *
+     * @param string text to sanitize
+     *
+     * @return string  the sanitized text
+     */
+    public function strip($text)
+    {
+        return strip_tags($text, "<h3><img><h2><blockquote><p><ul><li><html><body><div>");
     }
 }

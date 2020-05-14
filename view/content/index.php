@@ -10,7 +10,7 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 ?>
 
-<div class="movieIndex">
+<div class="contentIndex">
     <h1>CMS</h1>
     <p>Välkommen till mitt Content management system.</p>
     <p>Här kan du:</p>
@@ -18,6 +18,6 @@ namespace Anax\View;
         <li>Se allt innehåll</li>
         <li>Redigera innehåll</li>
         <li>Se artiklar</li>
-        <li>Se bloggposterr</li>
+        <li>Se bloggposter</li>
     </ul>
 </div>

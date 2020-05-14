@@ -78,7 +78,7 @@ class ContentController implements AppInjectableInterface
     {
         $title = "CMS Show all";
 
-        $res = $this->content->showAllExistingContent();
+        $res = $this->content->showAllContent();
 
         $this->app->page->add("content/header");
         $this->app->page->add("content/show-all", [
@@ -298,14 +298,19 @@ class ContentController implements AppInjectableInterface
                 "contentId"
             ]);
 
+
             // var_dump($params);
             if (!$params["contentSlug"]) {
                 $params["contentSlug"] = slugify($params["contentTitle"]);
+                if ($this->content->checkSlug($params["contentSlug"])) {
+                    $params["contentSlug"] = $params["contentSlug"] . $params["contentId"];
+                }
             }
 
             if (!$params["contentPath"]) {
                 $params["contentPath"] = null;
             }
+
             $this->content->editContent($params);
         }
         return $this->app->response->redirect("content/edit");
@@ -364,6 +369,6 @@ class ContentController implements AppInjectableInterface
         $id = $request->getPost("contentId");
 
         $this->content->deleteContent($id);
-        return $this->app->response->redirect("content/show-all");
+        return $this->app->response->redirect("content/admin");
     }
 }

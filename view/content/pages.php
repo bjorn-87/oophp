@@ -16,7 +16,7 @@ if (!$resultset) {
 }
 ?>
 
-<div class="movieIndex">
+<div class="contentIndex">
 
 <table>
     <tr class="first">

@@ -3,7 +3,7 @@ if (!$resultset) {
     return;
 }
 ?>
-<div class="movieIndex">
+<div class="contentIndex">
 
 
 <table>
@@ -12,6 +12,8 @@ if (!$resultset) {
         <th>Id</th>
         <th>Title</th>
         <th>Type</th>
+        <th>Path</th>
+        <th>Slug</th>
         <th>Published</th>
         <th>Created</th>
         <th>Updated</th>
@@ -24,6 +26,8 @@ if (!$resultset) {
         <td><?= esc($row->id) ?></td>
         <td><?= esc($row->title) ?></td>
         <td><?= esc($row->type) ?></td>
+        <td><?= esc($row->path) ?></td>
+        <td><?= esc($row->slug) ?></td>
         <td><?= esc($row->published) ?></td>
         <td><?= esc($row->created) ?></td>
         <td><?= esc($row->updated) ?></td>

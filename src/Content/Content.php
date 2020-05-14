@@ -111,13 +111,27 @@ class Content
 
 
     /**
-     * Method to get the number of rows in the table.
+     * Method to soft delete content
      *
-     * @return int $count[0].
+     * @return void.
      */
     public function deleteContent($id)
     {
         $sql = "UPDATE content SET deleted=NOW() WHERE id=?;";
         $this->db->execute($sql, [$id]);
+    }
+
+
+
+    /**
+     * Method to get the number of rows in the table.
+     *
+     * @return int $count[0].
+     */
+    public function checkSlug($slug)
+    {
+        $sql = "SELECT * FROM content WHERE slug = ?;";
+        $content = $this->db->executeFetch($sql, [$slug]);
+        return $content;
     }
 }

@@ -10,7 +10,7 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 ?>
 
-<div class="movieIndex">
+<div class="contentIndex">
 
 <form method="post">
     <fieldset>
