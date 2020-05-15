@@ -78,7 +78,7 @@ class ContentPageController implements AppInjectableInterface
      *
      * @return object
      */
-    public function pageActionGet($path=null) : object
+    public function pageActionGet($path = null) : object
     {
         $title = "Page";
 
