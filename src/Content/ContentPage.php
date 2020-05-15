@@ -44,6 +44,7 @@ SELECT
     END AS status
 FROM content
 WHERE type=?
+AND path IS NOT NULL
 ;
 EOD;
         $resultset = $this->db->executeFetchAll($sql, ["page"]);
