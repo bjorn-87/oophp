@@ -26,7 +26,9 @@ class ContentPost
 
 
     /**
-     * @var object $db database object.
+     * Method to get all posts
+     *
+     * @return object $resultset
      */
     public function showAllPosts()
     {
@@ -41,13 +43,27 @@ ORDER BY published DESC
 ;
 EOD;
         $resultset = $this->db->executeFetchAll($sql, ["post"]);
+        foreach ($resultset as $row) {
+            if ($row->filter) {
+                $arrayFilter = explode(",", $row->filter);
+                array_unshift($arrayFilter, "strip");
+                try {
+                    $row->data = $this->textFilter->parse($row->data, $arrayFilter);
+                } catch (\Bjos\TextFilter\MyTextFilterException $e) {
+                    $row->error = $e->getMessage();
+                }
+            }
+        }
         return $resultset;
     }
 
 
-
     /**
-     * @var object $db database object.
+     * Method to get all posts
+     *
+     * @param string $slug
+     *
+     * @return object $resultset
      */
     public function showPost($slug)
     {
@@ -72,9 +88,15 @@ EOD;
             if ($filters) {
                 $arrayFilter = explode(",", $filters);
                 array_unshift($arrayFilter, "strip");
-                $content->data = $this->textFilter->parse($content->data, $arrayFilter);
+
+                try {
+                    $content->data = $this->textFilter->parse($content->data, $arrayFilter);
+                } catch (\Bjos\TextFilter\MyTextFilterException $e) {
+                    $content->error = $e->getMessage();
+                }
             }
         }
+
         return $content;
     }
 }

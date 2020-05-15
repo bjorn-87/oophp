@@ -28,5 +28,7 @@ namespace Anax\View;
     </p>
     </fieldset>
 </form>
-
+<p class="backButtons">
+    <a href="<?= url("content/admin")?>">Tillbaka</a>
+</p>
 </div>

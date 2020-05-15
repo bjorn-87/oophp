@@ -124,14 +124,28 @@ class Content
 
 
     /**
-     * Method to get the number of rows in the table.
+     * Method to check if a slug exists.
      *
      * @return int $count[0].
      */
-    public function checkSlug($slug)
+    public function checkSlug($slug, $id)
     {
-        $sql = "SELECT * FROM content WHERE slug = ?;";
-        $content = $this->db->executeFetch($sql, [$slug]);
+        $sql = "SELECT id FROM content WHERE slug=? AND NOT id=?;";
+        $content = $this->db->executeFetchAll($sql, [$slug, $id]);
+        return $content;
+    }
+
+
+
+    /**
+     * Method to check if a path exists
+     *
+     * @return int $.
+     */
+    public function checkPath($path, $id)
+    {
+        $sql = "SELECT id FROM content WHERE path=? AND NOT id=?;";
+        $content = $this->db->executeFetchAll($sql, [$path, $id]);
         return $content;
     }
 }

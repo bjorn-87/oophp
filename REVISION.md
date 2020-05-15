@@ -92,3 +92,29 @@ v6.0.0 (2020-05-11)
 v6.0.1 (2020-05-12)
 
 * Finished textfilter with testpages
+
+* added style to textfilter
+
+v6.0.2 (2020-05-13)
+
+* Added CMS class and controller
+
+* Adding CMS to navbar
+
+* added routers for blog/pages
+
+v6.0.3 (2020-05-14)
+
+* Adding class and controller for ContentPage
+
+* Adding style to CMS
+
+v6.0.4 (2020-05-14)
+
+* adding ContentPage for blog to CMS
+
+* Additional style for CMS
+
+v6.0.5 (2020-05-15)
+
+* Finished CMS

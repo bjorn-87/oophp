@@ -28,9 +28,9 @@ class ContentPage
 
 
     /**
-     * Method to get the value of the dice.
+     * Method to get all pages
      *
-     * @return int $value.
+     * @return object $resultset.
      */
     public function showAllPages()
     {
@@ -52,9 +52,11 @@ EOD;
 
 
     /**
-     * Method to get the value of the dice.
+     * Method to get one page
      *
-     * @return int $value.
+     * @param string $route
+     *
+     * @return object $content.
      */
     public function showPage($route)
     {
@@ -81,7 +83,11 @@ EOD;
 
                 array_unshift($arrayFilter, "strip");
 
-                $content->data = $this->textFilter->parse($content->data, $arrayFilter);
+                try {
+                    $content->data = $this->textFilter->parse($content->data, $arrayFilter);
+                } catch (\Bjos\TextFilter\MyTextFilterException $e) {
+                    $content->error = "The filter is not valid";
+                }
             }
         }
 

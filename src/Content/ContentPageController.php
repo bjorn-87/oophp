@@ -85,11 +85,13 @@ class ContentPageController implements AppInjectableInterface
         // var_dump($path);
 
         $content = $this->contentPage->showPage($path);
+        $error = $content->error ?? null;
 
         $this->app->page->add("content/header");
         if ($content) {
             $this->app->page->add("content/page", [
                 "content" => $content,
+                "error" => $error,
             ]);
         } else {
             $this->app->page->add("content/404");

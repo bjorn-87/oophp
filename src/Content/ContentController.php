@@ -302,12 +302,17 @@ class ContentController implements AppInjectableInterface
             // var_dump($params);
             if (!$params["contentSlug"]) {
                 $params["contentSlug"] = slugify($params["contentTitle"]);
-                if ($this->content->checkSlug($params["contentSlug"])) {
-                    $params["contentSlug"] = $params["contentSlug"] . $params["contentId"];
-                }
+            }
+
+            if ($this->content->checkSlug($params["contentSlug"], $params["contentId"])) {
+                $params["contentSlug"] = $params["contentSlug"] . $params["contentId"];
             }
 
             if (!$params["contentPath"]) {
+                $params["contentPath"] = null;
+            }
+
+            if ($this->content->checkPath($params["contentPath"], $params["contentId"])) {
                 $params["contentPath"] = null;
             }
 

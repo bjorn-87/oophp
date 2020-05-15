@@ -59,7 +59,9 @@ namespace Anax\View;
         <button type="reset"><i class="fa fa-undo" aria-hidden="true"></i> Reset</button>
         <button type="submit" name="doDelete"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
     </p>
-    <a href="<?= url("content/admin")?>">Tillbaka</a>
+    <p class="backButtons">
+        <a href="<?= url("content/admin")?>">Tillbaka</a>
+    </p>
     </fieldset>
 </form>
 

@@ -25,7 +25,7 @@ if (!$resultset) {
         <h1><a href="<?= url("content/blog/blogpost")?>/<?= esc($row->slug) ?>"><?= esc($row->title) ?></a></h1>
         <p><i>Published: <time datetime="<?= esc($row->published_iso8601) ?>" pubdate><?= esc($row->published) ?></time></i></p>
     </header>
-    <?= esc($row->data) ?>
+    <?= $row->data ?>
 </section>
 <?php endforeach; ?>
 

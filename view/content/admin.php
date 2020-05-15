@@ -45,10 +45,10 @@ if (!$resultset) {
         <td><?= esc($row->deleted) ?></td>
         <td>
             <a class="icons" href="<?= url("content/edit")?>?id=<?= esc($row->id) ?>" title="Edit this content">
-                <i class="fas fa-edit" aria-hidden="true"></i>
+                <i class="fas fa-edit fa-2x" aria-hidden="true"></i>
             </a>
             <a class="icons" href="<?= url("content/delete")?>?id=<?= esc($row->id) ?>" title="Delete this content">
-                <i class="fas fa-trash" aria-hidden="true"></i>
+                <i class="fas fa-trash fa-2x" aria-hidden="true"></i>
             </a>
         </td>
     </tr>

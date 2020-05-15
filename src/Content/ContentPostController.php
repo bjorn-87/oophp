@@ -85,11 +85,15 @@ class ContentPostController implements AppInjectableInterface
         // var_dump($path);
 
         $content = $this->contentPost->showPost($path);
+        $error = $content->error ?? null;
+
+        // var_dump($error);
 
         $this->app->page->add("content/header");
         if ($content) {
             $this->app->page->add("content/blogpost", [
                 "content" => $content,
+                "error" => $error,
             ]);
         } else {
             $this->app->page->add("content/404");
