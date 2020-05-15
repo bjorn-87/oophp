@@ -5879,6 +5879,7 @@ form label {
   text-align: center;
   width: 100%;
   border-collapse: collapse;
+  font-size: 14px;
 }
 .contentIndex tr.first {
   background-color: #ddd;
@@ -5932,6 +5933,13 @@ form label {
 }
 .backButtons a:hover {
   text-decoration: underline;
+  color: #333;
+}
+.icons {
+  text-decoration: none;
+  color: blue;
+}
+.icons:hover {
   color: #333;
 }
 /**
@@ -6057,6 +6065,14 @@ form label {
   .contentForm input[type=text],
   .contentForm input[type=datetime] {
     width: 100%;
+  }
+  .contentIndex table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+  }
+  .contentIndex tr:nth-of-type(2n) {
+    background-color: #ddd;
   }
 }
 /**
